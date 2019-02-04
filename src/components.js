@@ -69,7 +69,9 @@ export const VBlackHole = {
       this.blackHole = ensureBlackHole(this, name)
     },
     sync() {
-      if (this.freeze) {
+      const { blackHole } = this
+      const sameParent = blackHole._parents.includes(this.$parent)
+      if (sameParent && this.freeze) {
         this.freeze = false
         return
       }
